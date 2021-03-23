@@ -36,4 +36,5 @@ class BlogController extends Controller
         //Return information to blog-layout
         return view('components.blog-layout',compact('blog','author'));
     }
+
 }

@@ -41,15 +41,18 @@
             <h1 class="font-bold text-2xl">Current Blogs</h1>
             <div class="container grid grid-cols-3 gap-6 mt-10 ">
                 @foreach($blogs as $blog)
-                    <div class="container mt-5 blog-items">
-                        <div class="container hover:bg-blue-300  cursor-pointer">
-                        <h1 class="text-gray-700 text-xl font-bold">{{ $blog->title }}</h1>
-                        <p>Created On: {{ $blog->created_at->diffForHumans() }}</p>
-                        <h3 class="text-gray-700">{{ $blog->body }}</h3>
-                        <p class="text-gray-700">Author: {{ $blog->user->name }}</p>
-                        <a href="{{ route('show',$blog->id) }}" class="pt-10">Read Blog</a>
-                         </div>
-                    </div>
+                    @if($blog->published)
+                        <div class="container mt-5 blog-items">
+                            <div class="container hover:bg-blue-300  cursor-pointer">
+                            <h1 class="text-gray-700 text-xl font-bold">{{ $blog->title }}</h1>
+                            <p>Created On: {{ $blog->created_at->diffForHumans() }}</p>
+                            <h3 class="text-gray-700">{{ $blog->body }}</h3>
+                            <p class="text-gray-700">Author: {{ $blog->user->name }}</p>
+                            <a href="{{ route('show',$blog->id) }}" class="pt-10">Read Blog</a>
+                             </div>
+                        </div>
+                    @endif
+
                 @endforeach
             </div>
         </div>

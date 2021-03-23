@@ -14,18 +14,40 @@ class Blogs extends Component
 
     public $blogs, $title, $body, $blog_id, $user_id;
     public $is_open = 0;
+
     /**
      * @var mixed
      */
+
     private $user;
+    /**
+     * @var bool|mixed
+     */
+
+
 
     public function render()
     {
         //Get Only the Blog Posts that belongs to the User.
         $this->blogs = Blog::query()
-        ->where('user_id','=',Auth::user()->id)->get();
+            ->where('user_id',Auth::user()->id)
+            ->get();
 
         return view('livewire.blogs');
+    }
+
+    public function publish($id)
+    {
+       $testblog = Blog::find($id);
+       $testblog->published = true;
+       $testblog->save();
+    }
+
+    public function unPublish($id)
+    {
+        $testblog = Blog::find($id);
+        $testblog->published = false;
+        $testblog->save();
     }
 
 
@@ -41,10 +63,12 @@ class Blogs extends Component
         $this->is_open = true;
     }
 
+
     public function closeModal()
     {
         $this->is_open = false;
     }
+
 
     private function resetInputFields()
     {
@@ -67,7 +91,7 @@ class Blogs extends Component
         //Update or Create a blog related to the user.
         $user->blogs()->updateOrCreate(['id' => $this->blog_id], [
             'title' => $this->title,
-            'body' => $this->body
+            'body' => $this->body,
         ]);
 
 

@@ -19,11 +19,10 @@ class CreateBlogsTable extends Migration
             $table->text('body');
             $table->foreignId('user_id')
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete()
                 ->references('id')
                 ->on('users');
             $table->timestamps();
+            $table->boolean('published')->default(false);
         });
     }
 

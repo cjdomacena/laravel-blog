@@ -14,7 +14,7 @@ use App\Http\Livewire\Blogs;
 |
 */
 
- Route::get('/', [\App\Http\Controllers\BlogController::class,'index']);
+ Route::get('/', [\App\Http\Controllers\BlogController::class,'index'])->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
